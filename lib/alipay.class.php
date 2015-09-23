@@ -22,7 +22,7 @@ class Alipay {
 
     /**
      * 通讯密钥
-     * @var sting
+     * @var string
      */
     private $token;
 
@@ -78,7 +78,7 @@ class Alipay {
         require_once dirname(__FILE__) . '/simple_html_dom.php';
 
         $data = $this->requestURL();
-        if(empty($data)) return $data;  //如过抓取到的内容是空的说明cookie失效了。
+        if(empty($data) || strlen($data < 100)) return $data;  //如过抓取到的内容是空的说明cookie失效了。
         $html = new simple_html_dom();
         $html->load($data);
         $ymd = $html->find('.time-d');
@@ -133,7 +133,7 @@ class Alipay {
 
     /**
      * 运行程序
-     * @return void
+     * @return boolean
      */
     public function run() {
 
